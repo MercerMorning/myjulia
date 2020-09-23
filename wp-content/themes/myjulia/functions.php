@@ -1,6 +1,7 @@
 <?php
 add_action('wp_enqueue_scripts', 'mj_styles');
 add_action('init', 'mj_register_types');
+add_action('widgets_init', 'mj_register');
 
 function mj_styles() {
     wp_enqueue_style(
@@ -270,9 +271,66 @@ function mj_register_types(){
         'supports'            => ['title', 'thumbnail'],
         'has_archive' => true
     ]);
+
+    register_post_type( 'works', [
+        'labels' => [
+            'name'               => 'Работы', // основное название для типа записи
+            'singular_name'      => 'Работа', // название для одной записи этого типа
+            'add_new'            => 'Добавить работу', // для добавления новой записи
+            'add_new_item'       => 'Добавить работу', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать работу', // для редактирования типа записи
+            'new_item'           => 'Новая работа', // текст новой записи
+            'view_item'          => 'Смотреть работу', // для просмотра записи этого типа.
+            'search_items'       => 'Искать работу', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в работах', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Работы', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-visibility',
+        'hierarchical'        => false,
+        'supports'            => ['title', 'thumbnail'],
+        'has_archive' => true
+    ]);
+
+    register_post_type( 'services', [
+        'labels' => [
+            'name'               => 'Услуги', // основное название для типа записи
+            'singular_name'      => 'Услуга', // название для одной записи этого типа
+            'add_new'            => 'Добавить услугу', // для добавления новой записи
+            'add_new_item'       => 'Добавить услугу', // заголовка у вновь создаваемой записи в админ-панели.
+            'edit_item'          => 'Редактировать услугу', // для редактирования типа записи
+            'new_item'           => 'Новая услуга', // текст новой записи
+            'view_item'          => 'Смотреть услугу', // для просмотра записи этого типа.
+            'search_items'       => 'Искать услугу', // для поиска по этим типам записи
+            'not_found'          => 'Не найдено', // если в результате поиска ничего не было найдено
+            'not_found_in_trash' => 'Не найдено в услугах', // если не было найдено в корзине
+            'parent_item_colon'  => '', // для родителей (у древовидных типов)
+            'menu_name'          => 'Услуги', // название меню
+        ],
+        'public'              => true,
+        'menu_position'       => 20,
+        'menu_icon'           => 'dashicons-admin-customizer',
+        'hierarchical'        => false,
+        'supports'            => ['title'],
+        'has_archive' => true
+    ]);
 }
 
-add_image_size( 'service_type_image', 40, 40 );
+function mj_register()
+{
+    register_sidebar([
+        'name' => 'Адрес',
+        'id' => 'omg-footer-soc',
+        'before_widget' => null,
+        'after_widget' => null,
+    ]);
+}
+
+add_image_size( 'Тип услуги', 40, 40 );
+add_image_size( 'Работа', 820, 960, true);
 
 function _i_assets_path( $path ){
     return get_template_directory_uri() . '/assets/' . $path;

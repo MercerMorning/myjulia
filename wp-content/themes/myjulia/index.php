@@ -106,45 +106,32 @@ wp_reset_postdata();
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4 ftco-animate">
-                <a href="#" class="work-entry">
-                    <img src="images/work-1.jpg" class="img-fluid" alt="Colorlib Template">
-                    <div class="info d-flex align-items-center">
-                        <div>
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
+            <?php
+            $service_types = new WP_Query ( array(
+                'post_type' => 'works'
+            ) );
+            if ($service_types->have_posts()) :
+                while ($service_types->have_posts()) :
+                    $service_types->the_post();
+                    ?>
+                    <div class="col-md-4 ftco-animate">
+                        <a href="#" class="work-entry">
+                            <img src="<?php echo get_field('image')['sizes']['Работа']; ?>" class="img-fluid" alt="Colorlib Template">
+                            <div class="info d-flex align-items-center">
+                                <div>
+                                    <div class="icon mb-4 d-flex align-items-center justify-content-center">
+                                        <span class="icon-search"></span>
+                                    </div>
+                                    <h3><?php the_title(); ?></h3>
+                                </div>
                             </div>
-                            <h3>Lips Makeover</h3>
-                        </div>
+                        </a>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <a href="#" class="work-entry">
-                    <img src="images/work-2.jpg" class="img-fluid" alt="Colorlib Template">
-                    <div class="info d-flex align-items-center">
-                        <div>
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                            <h3>Hair Style</h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-4 ftco-animate">
-                <a href="#" class="work-entry">
-                    <img src="images/work-3.jpg" class="img-fluid" alt="Colorlib Template">
-                    <div class="info d-flex align-items-center">
-                        <div>
-                            <div class="icon mb-4 d-flex align-items-center justify-content-center">
-                                <span class="icon-search"></span>
-                            </div>
-                            <h3>Makeup</h3>
-                        </div>
-                    </div>
-                </a>
-            </div>
+                <?php
+                endwhile;
+            endif;
+            wp_reset_postdata();
+            ?>
         </div>
     </div>
 </section>
@@ -184,76 +171,42 @@ wp_reset_postdata();
     <div class="container">
         <div class="row justify-content-center mb-5 pb-3">
             <div class="col-md-7 heading-section text-center ftco-animate">
-                <h2 class="mb-4">Beauty Pricing</h2>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h2 class="mb-4">Цены на услуги</h2>
+<!--                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>-->
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Basic</h3>
-                        <p><span class="price">$24.50</span> <span class="per">/ one trip</span></p>
+            <?php
+            $service_types = new WP_Query ( array(
+                'post_type' => 'services'
+            ) );
+            if ($service_types->have_posts()) :
+                while ($service_types->have_posts()) :
+                    $service_types->the_post();
+                    ?>
+                    <div class="col-md-3 ftco-animate">
+                        <div class="pricing-entry pb-5 text-center">
+                            <div>
+                                <h3 class="mb-4"><?php the_title(); ?></h3>
+                                <p>
+                                    <span class="price"><?php echo get_field('price'); ?> ₽</span>
+<!--                                    <span class="per">/ one trip</span>-->
+                                </p>
+                            </div>
+                            <ul>
+                                <?php $include = explode(' | ',get_field('include')); ?>
+                                <?php foreach ($include as $item) : ?>
+                                    <li><?php echo $item; ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+<!--                            <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>-->
+                        </div>
                     </div>
-                    <ul>
-                        <li>Nail Cutting &amp; Styling</li>
-                        <li>Hair Trimming</li>
-                        <li>Spa Therapy</li>
-                        <li>Body Massage</li>
-                        <li>Manicure</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Standard</h3>
-                        <p><span class="price">$34.50</span> <span class="per">/ one trip</span></p>
-                    </div>
-                    <ul>
-                        <li>Nail Cutting &amp; Styling</li>
-                        <li>Hair Trimming</li>
-                        <li>Spa Therapy</li>
-                        <li>Body Massage</li>
-                        <li>Manicure</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry active pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Premium</h3>
-                        <p><span class="price">$54.50</span> <span class="per">/ one trip</span></p>
-                    </div>
-                    <ul>
-                        <li>Nail Cutting &amp; Styling</li>
-                        <li>Hair Trimming</li>
-                        <li>Spa Therapy</li>
-                        <li>Body Massage</li>
-                        <li>Manicure</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                </div>
-            </div>
-            <div class="col-md-3 ftco-animate">
-                <div class="pricing-entry pb-5 text-center">
-                    <div>
-                        <h3 class="mb-4">Platinum</h3>
-                        <p><span class="price">$89.50</span> <span class="per">/ one trip</span></p>
-                    </div>
-                    <ul>
-                        <li>Nail Cutting &amp; Styling</li>
-                        <li>Hair Trimming</li>
-                        <li>Spa Therapy</li>
-                        <li>Body Massage</li>
-                        <li>Manicure</li>
-                    </ul>
-                    <p class="button text-center"><a href="#" class="btn btn-primary btn-outline-primary px-4 py-3">Order now</a></p>
-                </div>
-            </div>
-        </div>
+                <?php
+                endwhile;
+            endif;
+            wp_reset_postdata();
+            ?>
     </div>
 </section>
 
@@ -365,58 +318,59 @@ wp_reset_postdata();
 
 
 <section class="ftco-section ftco-appointment">
-    <div class="overlay"></div>
-    <div class="container">
-        <div class="row d-md-flex align-items-center">
-            <div class="col-md-2"></div>
-            <div class="col-md-4 d-flex align-self-stretch ftco-animate">
-                <div class="appointment-info text-center p-5">
-                    <div class="mb-4">
-                        <h3 class="mb-3">Address</h3>
-                        <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>
-                    </div>
-                    <div class="mb-4">
-                        <h3 class="mb-3">Phone</h3>
-                        <p class="day"><strong>000 123 456</strong> or <strong>000 987 654</strong></p>
-                    </div>
-                    <div>
-                        <h3 class="mb-3">Opening Hours</h3>
-                        <p class="day"><strong>Monday - Friday</strong></p>
-                        <span>08:00am - 09:00pm</span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 appointment pl-md-5 ftco-animate">
-                <h3 class="mb-3">Appointments</h3>
-                <form action="#" class="appointment-form">
-                    <div class="row form-group d-flex">
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="First Name">
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="row form-group d-flex">
-                        <div class="col-md-6">
-                            <div class="input-wrap">
-                                <div class="icon"><span class="ion-md-calendar"></span></div>
-                                <input type="text" id="appointment_date" class="form-control" placeholder="Date">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <input type="text" class="form-control" placeholder="Phone">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Order" class="btn btn-white btn-outline-white py-3 px-4">
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+    <?php the_content(); ?>
+<!--    <div class="overlay"></div>-->
+<!--    <div class="container">-->
+<!--        <div class="row d-md-flex align-items-center">-->
+<!--            <div class="col-md-2"></div>-->
+<!--            <div class="col-md-4 d-flex align-self-stretch ftco-animate">-->
+<!--                <div class="appointment-info text-center p-5">-->
+<!--                    <div class="mb-4">-->
+<!--                        <h3 class="mb-3">Address</h3>-->
+<!--                        <p>	203 Fake St. Mountain View, San Francisco, California, USA</p>-->
+<!--                    </div>-->
+<!--                    <div class="mb-4">-->
+<!--                        <h3 class="mb-3">Phone</h3>-->
+<!--                        <p class="day"><strong>000 123 456</strong> or <strong>000 987 654</strong></p>-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <h3 class="mb-3">Opening Hours</h3>-->
+<!--                        <p class="day"><strong>Monday - Friday</strong></p>-->
+<!--                        <span>08:00am - 09:00pm</span>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="col-md-6 appointment pl-md-5 ftco-animate">-->
+<!--                <h3 class="mb-3">Appointments</h3>-->
+<!--                <form action="#" class="appointment-form">-->
+<!--                    <div class="row form-group d-flex">-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input type="text" class="form-control" placeholder="First Name">-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input type="text" class="form-control" placeholder="Last Name">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="row form-group d-flex">-->
+<!--                        <div class="col-md-6">-->
+<!--                            <div class="input-wrap">-->
+<!--                                <div class="icon"><span class="ion-md-calendar"></span></div>-->
+<!--                                <input type="text" id="appointment_date" class="form-control" placeholder="Date">-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-6">-->
+<!--                            <input type="text" class="form-control" placeholder="Phone">-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <textarea name="" id="" cols="30" rows="3" class="form-control" placeholder="Message"></textarea>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <input type="submit" value="Order" class="btn btn-white btn-outline-white py-3 px-4">-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 </section>
 <?php get_footer(); ?>
